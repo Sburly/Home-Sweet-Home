@@ -1,0 +1,24 @@
+<div class="post">
+    <article class="post__card">
+        <section class="post__image">
+            <img class="img-fluid" src="/images/cozy-apartment-living-room-ideas-kymacy.jpg" alt="">
+        </section>
+        <section class="post__info">
+            <div>
+                <h2 class="post__name"><%= post.name %></h2>
+                <span class="post__rating"><b>4.5</b>/5</span>
+            </div>
+            <p><%= post.description %></p>
+            <div>
+                <small>by Sburly</small>
+                <small><%= post.location %></small>
+            </div>
+        </section>
+        <section class="post__price">
+            <span><%= post.price %>€/day</span>
+        </section>
+        <section class="post__button">
+            <a href="/<%= post._id %>" class="button--main">View More</a>
+        </section>
+    </article>
+</div>

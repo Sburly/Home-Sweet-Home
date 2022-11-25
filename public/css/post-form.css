@@ -1,0 +1,66 @@
+.house {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 5em;
+}
+
+.house__form {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    padding: 1em 2em;
+    border: 5px solid var(--main);
+    border-radius: var(--radius);
+}
+
+.house__form h2 {
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.house__form section {
+    width: 100%;
+    display: flex;
+    gap: 1em;
+}
+
+.house__form div textarea {
+    resize: none;
+    height: 2.5em;
+    max-height: 10em;
+}
+
+.house__form div textarea::-webkit-scrollbar {
+    width: 0px;
+}
+
+.form__item-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form__input {
+    width: 100%;
+}
+
+.house__form__name {
+    width: 70%;
+}
+
+.house__form__price {
+    width: 30%;
+}
+
+.house__form__button {
+    margin-top: 0.5em;
+    font-size: 30px;
+    font-weight: 700;
+    padding: 0.3em 0.5em;
+}

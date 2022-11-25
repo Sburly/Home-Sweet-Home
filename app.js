@@ -9,6 +9,8 @@ const bodyParser = require('body-parser');
 const mongoSanitize = require("express-mongo-sanitize");
 
 // Imports
+const Post = require("./models/post");
+
 // Express App Settings
 const app = express();
 let port = 5000;
@@ -33,8 +35,41 @@ db.once("open", () => console.log("Database connected"));
 app.use(mongoSanitize({ replaceWith: "_" }));
 
 // Routes
-app.get("/", (req, res) => {
-    res.render("home");
+app.get("/", async (req, res) => {
+    const posts = await Post.find({});
+    res.render("home", { posts });
+});
+
+app.get("/post", (req, res) => {
+    res.render("add");
+});
+
+app.post("/post", async (req, res) => {
+    const post = new Post(req.body);
+    await post.save();
+    res.redirect("/");
+});
+
+app.get("/:id", async (req, res) => {
+    const post = await Post.findById(req.params.id);
+    res.render("show", { post });
+});
+
+app.patch("/:id", async (req, res) => {
+    const { id } = req.params;
+    const post = await Post.findByIdAndUpdate(id, req.body);
+    await post.save();
+    res.redirect(`/${id}`);
+});
+
+app.get("/:id/edit", async (req, res) => {
+    const post = await Post.findById(req.params.id);
+    res.render("edit", { post });
+});
+
+app.delete("/:id", async (req, res) => {
+    await Post.findByIdAndDelete(req.params.id);
+    res.redirect("/");
 });
 
 // App Listening

@@ -1,0 +1,107 @@
+:root {
+    --main: #2739D7;
+    --sec: #D6B027;
+
+    --white: #EAEBF3;
+    --muted: #8f8e8e;
+    --black: #000000;
+
+    --fav-red: #FF6262;
+
+    --light-green: #B5FF93;
+    --dark-green: #008E0E;
+    --light-red: #FF9393;
+    --dark-red: #8E0000;
+
+    --radius: 7px;
+    --border: 2px solid var(--black);
+    --transition: all 200ms ease-in-out;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: var(--white);
+}
+
+.button--main {
+    background: var(--main);
+    text-align: center;
+    text-decoration: none;
+    font-size: 21px;
+    font-weight: 700;
+    border: var(--border);
+    border-radius: var(--radius);
+    color: var(--white);
+    -webkit-text-stroke: 0.5px var(--black);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.button--main:hover {
+    -moz-box-shadow: 0 0 7px var(--black);
+    -webkit-box-shadow: 0 0 7px var(--black);
+    box-shadow: 0 0 7px var(--black);
+    text-shadow: 2px 2px 3px var(--black);
+    color: var(--white);
+}
+
+.button--transparent {
+    background: none;
+    border: none;
+    text-decoration: none;
+    color: var(--black);
+}
+
+.button--transparent:hover {
+    color: var(--black);
+}
+
+.label--form {
+    font-weight: 700;
+}
+
+.icon--small {
+    width: 30px;
+    height: 30px;
+}
+
+.menu--edit-delete {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--main);
+    z-index: 10;
+    position: fixed;
+    gap: 0.3em;
+    padding: 0.5em;
+    border: var(--border);
+    border-radius: var(--radius);
+}
+
+.menu--edit-delete a,
+.menu--edit-delete button {
+    color: var(--white);
+}
+
+.menu--edit-delete a:hover,
+.menu--edit-delete button:hover {
+    color: var(--sec);
+}
+
+.menu--edit-delete a {
+    padding-bottom: 0.3em;
+    border-bottom: 2px solid var(--white);
+}
+
+.noDisplay {
+    display: none;
+}

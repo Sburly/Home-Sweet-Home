@@ -1,0 +1,39 @@
+<% layout('layout') %>
+<div class="house">
+    <form action="/post" method="post" class="house__form">
+        <h2>Add new post!</h2>
+        <section>
+            <div class="form__item-group house__form__name">
+                <label class="label--form" for="name">Location Name</label>
+                <input class="form__input form__input--name" type="text" name="name" id="name">
+            </div>
+            <div class="form__item-group house__form__address">
+                <label class="label--form" for="location">Address</label>
+                <input class="form__input form__input--address" type="text" name="location" id="location">
+            </div>
+        </section>
+        <div class="form__item-group house__form__description">
+            <label class="label--form" for="description">Description</label>
+            <textarea class="form__input form__input--description" name="description" id="description" placeholder="At max 1050 charters" maxlength="1050"></textarea>
+            <script>
+                const textarea = document.querySelector("#description");
+                textarea.addEventListener("keyup", e => {
+                    textarea.style.height = "2.5em";
+                    let scHeight = e.target.scrollHeight;
+                    textarea.style.height = `${scHeight}px`
+                });
+            </script>
+        </div>
+        <section>
+            <div class="form__item-group house__form__price">
+                <label class="label--form" for="price">Price per day</label>
+                <input class="form__input form__input--price" type="number" name="price" id="price">
+            </div>
+            <div class="form__item-group house__form__images">
+                <label class="label--form" for="images">Images</label>
+                <input class="form__input form__input--images" type="file" name="images" id="images">
+            </div>
+        </section>
+        <button class="button--main house__form__button">Add post</button>
+    </form>
+</div>
