@@ -10,6 +10,8 @@ const mongoSanitize = require("express-mongo-sanitize");
 
 // Imports
 const Post = require("./models/post");
+const catchAsync = require("./utilities/catchAsync");
+const ExpressError = require("./utilities/ExpressError");
 
 // Express App Settings
 const app = express();
@@ -35,41 +37,52 @@ db.once("open", () => console.log("Database connected"));
 app.use(mongoSanitize({ replaceWith: "_" }));
 
 // Routes
-app.get("/", async (req, res) => {
+app.get("/", catchAsync(async (req, res) => {
     const posts = await Post.find({});
     res.render("home", { posts });
-});
+}));
 
 app.get("/post", (req, res) => {
     res.render("add");
 });
 
-app.post("/post", async (req, res) => {
+app.post("/post", catchAsync(async (req, res) => {
     const post = new Post(req.body);
     await post.save();
     res.redirect("/");
-});
+}));
 
-app.get("/:id", async (req, res) => {
+app.get("/:id", catchAsync(async (req, res) => {
     const post = await Post.findById(req.params.id);
     res.render("show", { post });
-});
+}));
 
-app.patch("/:id", async (req, res) => {
+app.patch("/:id", catchAsync(async (req, res) => {
     const { id } = req.params;
     const post = await Post.findByIdAndUpdate(id, req.body);
     await post.save();
     res.redirect(`/${id}`);
-});
+}));
 
-app.get("/:id/edit", async (req, res) => {
-    const post = await Post.findById(req.params.id);
-    res.render("edit", { post });
-});
-
-app.delete("/:id", async (req, res) => {
+app.delete("/:id", catchAsync(async (req, res) => {
     await Post.findByIdAndDelete(req.params.id);
     res.redirect("/");
+}));
+
+app.get("/:id/edit", catchAsync(async (req, res) => {
+    const post = await Post.findById(req.params.id);
+    res.render("edit", { post });
+}));
+
+app.all("*", (req, res, next) => {
+    const error = new ExpressError("Page Not found", 404)
+    next(error);
+});
+
+app.use((err, req, res, next) => {
+    const { statusCode = 500 } = err;
+    if (!err.message) err.message = "Oh no! Something went wrong";
+    res.status(statusCode).render("error", { err });
 });
 
 // App Listening
