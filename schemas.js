@@ -25,6 +25,6 @@ const Joi = BaseJoi.extend(extension);
 module.exports.postSchema = Joi.object({
     name: Joi.string().required().escapeHTML(),
     description: Joi.string().required().escapeHTML(),
-    price: Joi.number().required().escapeHTML(),
+    price: Joi.number().required(),
     location: Joi.string().required().escapeHTML()
 });

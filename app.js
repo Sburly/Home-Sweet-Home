@@ -7,11 +7,17 @@ const methodOverride = require("method-override");
 const engine = require("ejs-locals");
 const bodyParser = require('body-parser');
 const mongoSanitize = require("express-mongo-sanitize");
+const session = require("express-session");
+const MongoDBStore = require("connect-mongo");
+const flash = require("connect-flash");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
 
 // Imports
-const Post = require("./models/post");
-const catchAsync = require("./utilities/catchAsync");
 const ExpressError = require("./utilities/ExpressError");
+const postsRoutes = require("./routes/posts");
+const usersRoutes = require("./routes/users");
+const User = require("./models/user");
 
 // Express App Settings
 const app = express();
@@ -36,43 +42,48 @@ db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => console.log("Database connected"));
 app.use(mongoSanitize({ replaceWith: "_" }));
 
-// Routes
-app.get("/", catchAsync(async (req, res) => {
-    const posts = await Post.find({});
-    res.render("home", { posts });
-}));
+// Mongo Session
+const store = MongoDBStore.create({
+    mongoUrl: process.env.MONGODB_URI,
+    secret: process.env.SECRET_KEY,
+    touchAfter: 24 * 3600
+});
+store.on("error", function(){ 
+    console.log("Store Error", e);
+});
+const sessionConfig = {
+    store,
+    name: "session",
+    secret: process.env.SECRET_KEY,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        expires: Date.now() + (1000 * 360 * 24 * 7),
+        maxAge: Date.now() + (1000 * 360 * 24 * 7),
+        httpOnly: true
+    }
+};
+app.use(session(sessionConfig));
 
-app.get("/post", (req, res) => {
-    res.render("add");
+// Passport
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+//Flash
+app.use(flash());
+
+app.use((req, res, next) => {
+    res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
+    next();
 });
 
-app.post("/post", catchAsync(async (req, res) => {
-    const post = new Post(req.body);
-    await post.save();
-    res.redirect("/");
-}));
-
-app.get("/:id", catchAsync(async (req, res) => {
-    const post = await Post.findById(req.params.id);
-    res.render("show", { post });
-}));
-
-app.patch("/:id", catchAsync(async (req, res) => {
-    const { id } = req.params;
-    const post = await Post.findByIdAndUpdate(id, req.body);
-    await post.save();
-    res.redirect(`/${id}`);
-}));
-
-app.delete("/:id", catchAsync(async (req, res) => {
-    await Post.findByIdAndDelete(req.params.id);
-    res.redirect("/");
-}));
-
-app.get("/:id/edit", catchAsync(async (req, res) => {
-    const post = await Post.findById(req.params.id);
-    res.render("edit", { post });
-}));
+// Routes
+app.use("/", usersRoutes);
+app.use("/", postsRoutes);
 
 app.all("*", (req, res, next) => {
     const error = new ExpressError("Page Not found", 404)

@@ -1,4 +1,5 @@
 <% layout('layout') %>
+<%- partial('partials/flash') %>
 <article class="main__display">
     <% for(let post of posts) { %>
         <%- partial('partials/card', { post }) %>
