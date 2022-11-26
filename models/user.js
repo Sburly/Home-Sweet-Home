@@ -7,6 +7,7 @@ const UserSchema = new mongoose.Schema({
         required: [true, "An email is needed"],
         unique: [true, "This email is already in use"]
     },
+    isLandowner: Boolean,
     posts: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Posts"

@@ -1,7 +1,7 @@
 const Post = require("../models/post");
 
 module.exports.renderHome = async (req, res) => {
-    const posts = await Post.find({});
+    const posts = await Post.find({}).populate("author");
     res.render("home", { posts });
 };
 
@@ -11,13 +11,14 @@ module.exports.renderAdd = (req, res) => {
 
 module.exports.addNew = async (req, res) => {
     const post = new Post(req.body);
+    post.author = req.user._id;
     await post.save();
-    req.flash("success", "You've succesfully created a new post!")
+    req.flash("success", "You've succesfully created a new post!");
     res.redirect("/");
 };
 
 module.exports.renderShow = async (req, res) => {
-    const post = await Post.findById(req.params.id);
+    const post = await Post.findById(req.params.id).populate("author");
     res.render("show", { post });
 };
 
