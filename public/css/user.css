@@ -1,0 +1,53 @@
+.form--user {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid var(--main);
+    border-radius: var(--radius);
+    margin-top: 5em;
+    padding: 1em 3em 0.5em 3em;
+}
+
+.form__input-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1em 0;
+    width: 100%;
+}
+
+.form--user div label {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.form--user div input[type=text],
+.form--user div input[type=password] {
+    width: 100%;
+    border: var(--border);
+    border-radius: var(--radius);
+}
+
+.form__checkbox-group {
+    width: 100%;
+    margin: 1em 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.form__checkbox-group input {
+    width: 17px;
+    height: 17px;
+}
+
+.button--user {
+    margin: 0.5em 0;
+    font-size: 35px;
+    padding: 0.1em 1em;
+}
