@@ -1,4 +1,5 @@
 const { postSchema } = require("./schemas");
+const Post = require("./models/post");
 
 module.exports.validatePost = (req, res, next) => {
     const { err } = postSchema.validate(req.body);

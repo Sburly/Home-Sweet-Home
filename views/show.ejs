@@ -27,10 +27,14 @@
             <small><%= post.location %></small>
         </div>
         <div>
-            <div><%= post.price %>€/day</div>
-            <button class="button--main button--book">Book Now!</button>
+            <div id="price" data-price="<%= post.price %>"><%= post.price %>€/day</div>
+            <button class="button--main button--book" id="bookButton">Book Now!</button>
         </div>
     </section>
     <%- partial('partials/menu', { post }) %>
 </article>
+<%- partial('partials/book', { post }) %>
+<div class="overlay" id="overlay"></div>
 <script src="/js/menu.js"></script>
+<script src="/js/bookModal.js"></script>
+<script src="/js/summary.js"></script>

@@ -1,4 +1,5 @@
 const Post = require("../models/post");
+const Booking = require("../models/book");
 
 module.exports.renderHome = async (req, res) => {
     const posts = await Post.find({}).populate("author");
@@ -37,4 +38,13 @@ module.exports.deletePost = async (req, res) => {
 module.exports.renderEdit = async (req, res) => {
     const post = await Post.findById(req.params.id);
     res.render("edit", { post });
+};
+
+module.exports.book = async (req, res) => {
+    const { id } = req.params;
+    const book = new Booking(req.body);
+    book.post = id;
+    book.user = req.user._id;
+    book.save();
+    res.redirect(`/${id}`);
 };

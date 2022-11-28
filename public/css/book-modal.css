@@ -1,0 +1,115 @@
+.overlay {
+    position: fixed;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: all;
+    z-index: 9;
+}
+
+.modal--book {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    border: 2px solid var(--black);
+    border-radius: var(--radius);
+    z-index: 10;
+    background: var(--white);
+    width: 40rem;
+    max-width: 80%;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5em;
+    width: 60%;
+    gap: 1em;
+}
+
+.modal--book.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.modal--book h1 {
+    font-weight: 700;
+}
+
+.modal--book h1 b {
+    color: var(--main);
+    -webkit-text-stroke: 0.5px var(--black);
+}
+
+.modal--book form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal--book__container__user {
+    display: grid;
+    grid-template-columns: 52% 42%;
+    gap: 6%;
+    width: 70%;
+}
+
+.modal--book__container__user section:first-of-type {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.input-group {
+    font-size: 18px;
+    font-weight: 700;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.5em;
+}
+
+.form__people input {
+    width: 30%;
+}
+
+.input-group input[type=date] {
+    text-align: center;
+}
+
+.modal--book__container__user section:last-of-type {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal--book__container__user section:last-of-type h3 {
+    font-weight: 700;
+}
+
+.modal--book__container__user section:last-of-type div {
+    padding-left: 1.5em;
+}
+
+.modal--book__container__user section:last-of-type div p {
+    margin-bottom: 0.3em;
+}
+
+.modal--book__button {
+    font-size: 27px;
+    margin-top: 1.5em;
+    padding: 0.3em 1.5em;
+}
+
+.modal--book p {
+    font-size: 15px;
+}

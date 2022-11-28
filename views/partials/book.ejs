@@ -1,0 +1,30 @@
+<article class="modal--book" id="bookModal">
+    <h1>Book a staying at "<b><%= post.name %></b>"</h1>
+    <form action="/<%= post._id %>/book" method="POST">
+        <section class="modal--book__container__user">
+            <section>
+                <div class="input-group form__people">
+                    <label for="people">Number of people</label>
+                    <input type="number" name="people" id="people" min="1" value="1"  required>
+                </div>
+                <div class="input-group">
+                    <label for="checkIn">Check-in date</label>
+                    <input type="date" name="checkIn" id="checkIn" required>
+                </div>
+                <div class="input-group">
+                    <label for="checkOut">Check-out date</label>
+                    <input type="date" name="checkOut" id="checkOut" required>
+                </div>
+            </section>
+            <section>
+                <h3>Summary:</h3>
+                <div>
+                    <p id="p1">No datas yet</p>
+                    <p id="p2"></p>
+                    <p id="p3"></p>
+                </div>
+            </section>
+        </section>
+        <button class="button--main modal--book__button">Book Now</button>
+    </form>
+</article>

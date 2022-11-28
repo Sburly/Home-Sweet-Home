@@ -17,4 +17,7 @@ router.route("/:id")
 
 router.route("/:id/edit").get(isLoggedIn, isAuthor, catchAsync(posts.renderEdit));
 
+router.route("/:id/book")
+    .post(isLoggedIn, catchAsync(posts.book));
+
 module.exports = router;
