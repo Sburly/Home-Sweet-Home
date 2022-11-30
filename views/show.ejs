@@ -8,7 +8,11 @@
         <div>
             <h2><%= post.name %></h2>
             <div>
-                <h3><b>4.5</b>/5</h3>
+                <% if(Number(post.rating)) { %> 
+                    <h3 class="post__rating"><b><%= post.rating %></b>/5</h3>
+                <% } else { %>
+                    <h3 class="post__rating"><b>N/D</b></h3>
+                <% } %>
                 <% if(currentUser && String(currentUser._id) === String(post.author._id)) { %> 
                     <button class="button--info" id="showInfoMenu"><%- partial('partials/svgs/info') %></button>
                 <% } %>

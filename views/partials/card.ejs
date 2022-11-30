@@ -6,7 +6,11 @@
         <section class="post__info">
             <div>
                 <h2 class="post__name"><%= post.name %></h2>
-                <span class="post__rating"><b>4.5</b>/5</span>
+                <% if(Number(post.rating)) { %> 
+                    <span class="post__rating"><%= post.rating %>/5</span>
+                <% } else { %>
+                    <span class="post__rating">N/D</span>
+                <% } %>
             </div>
             <p><%= post.description %></p>
             <div>

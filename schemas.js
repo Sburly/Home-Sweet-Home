@@ -26,7 +26,8 @@ module.exports.postSchema = Joi.object({
     name: Joi.string().required().escapeHTML(),
     description: Joi.string().required().escapeHTML(),
     price: Joi.number().required(),
-    location: Joi.string().required().escapeHTML()
+    location: Joi.string().required().escapeHTML(),
+    rating: Joi.string().escapeHTML()
 });
 
 module.exports.reviewSchema = Joi.object({
