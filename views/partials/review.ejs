@@ -1,0 +1,11 @@
+<article class="reviews">
+    <section class="reviews__button--create">
+        <button id="reviewButton">Leave a review</button>
+    </section>
+    <section class="reviews__display">
+        <% for(let review of post.reviews) { %> 
+            <%- partial('review-card', { post, review }) %>
+        <% } %>
+    </section>
+</article>
+<%- partial('review-modal', { post }) %>

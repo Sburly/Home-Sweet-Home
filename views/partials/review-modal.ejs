@@ -1,0 +1,23 @@
+<article class="modal--review" id="reviewModal">
+    <h1>How was your experience at "<b><%= post.name %></b>"</h1>
+    <form action="/<%= post._id %>/reviews" method="POST">
+        <div class="modal--review__upper">
+            <input type="text" name="title" id="title" maxlength="35" placeholder="Review Title">
+            <fieldset class="modal--review__rating starability-basic">
+                <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="1" checked aria-label="No rating." />
+                <input type="radio" id="first-rate1" name="rating" value="1" />
+                <label for="first-rate1" title="Terrible">1 star</label>
+                <input type="radio" id="first-rate2" name="rating" value="2" />
+                <label for="first-rate2" title="Not good">2 stars</label>
+                <input type="radio" id="first-rate3" name="rating" value="3" />
+                <label for="first-rate3" title="Average">3 stars</label>
+                <input type="radio" id="first-rate4" name="rating" value="4" />
+                <label for="first-rate4" title="Very good">4 stars</label>
+                <input type="radio" id="first-rate5" name="rating" value="5" />
+                <label for="first-rate5" title="Amazing">5 stars</label>
+            </fieldset>
+        </div>
+        <textarea name="body" id="body" style="resize: none;" rows="6" maxlength="140" placeholder="Review Body"></textarea>
+        <button class="button--main modal--review__button">Review Now</button>
+    </form>
+</article>

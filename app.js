@@ -17,6 +17,7 @@ const LocalStrategy = require("passport-local");
 const ExpressError = require("./utilities/ExpressError");
 const postsRoutes = require("./routes/posts");
 const usersRoutes = require("./routes/users");
+const reviewsRoutes = require("./routes/reviews");
 const User = require("./models/user");
 
 // Express App Settings
@@ -84,6 +85,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.use("/", usersRoutes);
+app.use("/:id/reviews", reviewsRoutes);
 app.use("/", postsRoutes);
 
 app.all("*", (req, res, next) => {

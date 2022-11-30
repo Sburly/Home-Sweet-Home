@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
 const catchAsync = require("../utilities/catchAsync");
-const  { validatePost } = require("../middlewares");
 const users = require("../controllers/users");
 const passport = require("passport");
 

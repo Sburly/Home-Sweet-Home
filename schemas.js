@@ -28,3 +28,9 @@ module.exports.postSchema = Joi.object({
     price: Joi.number().required(),
     location: Joi.string().required().escapeHTML()
 });
+
+module.exports.reviewSchema = Joi.object({
+    title: Joi.string().escapeHTML(),
+    body: Joi.string().escapeHTML(),
+    rating: Joi.number().required()
+});

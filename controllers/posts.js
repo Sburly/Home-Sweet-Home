@@ -19,7 +19,9 @@ module.exports.addNew = async (req, res) => {
 };
 
 module.exports.renderShow = async (req, res) => {
-    const post = await Post.findById(req.params.id).populate("author");
+    const post = await Post.findById(req.params.id)
+        .populate("author")
+        .populate("reviews");
     res.render("show", { post });
 };
 
