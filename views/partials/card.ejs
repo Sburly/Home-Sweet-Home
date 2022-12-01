@@ -14,7 +14,11 @@
             </div>
             <p><%= post.description %></p>
             <div>
-                <small>by <%= post.author.username %></small>
+                <% if(!post.author.username) { %>
+                    <small>by You</small>
+                <% } else { %>
+                    <small>by <%= post.author.username %></small>
+                <% } %>
                 <small><%= post.location %></small>
             </div>
         </section>

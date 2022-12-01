@@ -1,0 +1,6 @@
+<% layout('layout') %>
+<div class="main__display">
+    <% for(let post of posts) { %> 
+        <%- partial('partials/card', { post }) %>
+    <% } %>
+</div>

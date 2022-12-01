@@ -10,6 +10,9 @@ router.route("/post")
     .get(isLoggedIn, posts.renderAdd)
     .post(isLoggedIn, validatePost, catchAsync(posts.addNew));
 
+router.route("/places")
+    .get(isLoggedIn, catchAsync(posts.renderYourPlaces));
+
 router.route("/:id")
     .get(catchAsync(posts.renderShow))
     .patch(isLoggedIn, isAuthor, validatePost, catchAsync(posts.updatePost))

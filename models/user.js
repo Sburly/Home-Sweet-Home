@@ -10,18 +10,18 @@ const UserSchema = new mongoose.Schema({
     isLandowner: Boolean,
     posts: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Posts"
+        ref: "Post"
     }],
-    posts: [{
-        id: {
+    bookings: [{
+        _id: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Posts"
+            ref: "Booking"
         },
         date: Date
     }],
     favourites: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Posts"
+        ref: "Post"
     }],
     reviews: [{
         type: mongoose.Schema.Types.ObjectId,
