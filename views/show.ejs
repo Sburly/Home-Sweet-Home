@@ -1,9 +1,11 @@
 <% layout('layout') %>
 <article class="post--show">
     <section class="post--show__image">
+        <button class="button--transparent button--favourite" id="favButton" data-post="<%= post._id %>">
+            <%- partial('partials/svgs/heart', { post, user }) %>
+        </button>
         <img class="img-fluid" src="/images/cozy-apartment-living-room-ideas-kymacy.jpg" alt="">
     </section>
-
     <section class="post--show__info">
         <div>
             <h2><%= post.name %></h2>
@@ -43,3 +45,4 @@
 <script src="/js/menu.js"></script>
 <script src="/js/modal.js"></script>
 <script src="/js/summary.js"></script>
+<script src="/js/favourites.js"></script>

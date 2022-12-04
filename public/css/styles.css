@@ -109,3 +109,27 @@ body {
 .err {
     margin-top: 3em;
 }
+
+.icon--favourite {
+    width: 35px;
+    height: 35px;
+    fill: var(--white);
+    transition: var(--transition);
+}
+
+.button--favourite {
+    z-index: 8;
+    position: absolute;
+}
+
+.icon--favourite:hover {
+    stroke: var(--fav-red);
+}
+
+.icon--favourite.active {
+    fill: var(--fav-red);
+}
+
+.icon--favourite.active:hover {
+    stroke: var(--white);
+}

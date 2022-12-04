@@ -26,7 +26,8 @@ module.exports.renderShow = async (req, res) => {
     const post = await Post.findById(req.params.id)
         .populate("author")
         .populate("reviews");
-    res.render("show", { post });
+    const user = await User.findById(req.user._id);
+    res.render("show", { post, user });
 };
 
 module.exports.updatePost = async (req, res) => {
@@ -60,4 +61,27 @@ module.exports.renderYourPlaces = async (req, res) => {
     const user = await User.findById(req.user._id).populate("posts");
     const posts = user.posts;
     res.render("places", { posts });
+};
+
+module.exports.renderFavourites = async (req, res) => {
+    const user = await User.findById(req.user._id)
+        .populate("favourites");
+    const postsTemp = user.favourites;
+    let posts = [];
+    for(let post of postsTemp) {
+        const p = await post.populate("author");
+        posts.push(p);
+    }
+    res.render("favourites", { posts });
+};
+
+module.exports.addFavourite = (req, res) => {
+    let newArray = [];
+    for(let i of req.session.modifications) {
+        if(i[0] != req.body.id) newArray.push(i);
+    };
+    newArray.push([req.body.id, req.body.isFavourite]);
+    req.session.modifications = newArray;
+    req.session.save();
+    return true;
 };

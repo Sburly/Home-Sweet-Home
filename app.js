@@ -19,6 +19,7 @@ const postsRoutes = require("./routes/posts");
 const usersRoutes = require("./routes/users");
 const reviewsRoutes = require("./routes/reviews");
 const User = require("./models/user");
+const Post = require("./models/post");
 
 // Express App Settings
 const app = express();
@@ -80,6 +81,34 @@ app.use((req, res, next) => {
     res.locals.currentUser = req.user;
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
+    next();
+});
+
+app.use(async (req, res, next) => {
+    if(req.user) {
+        const user = await User.findById(req.user._id);
+        let fav = [...user.favourites];
+        for(let i of fav) {
+            const doesPostExist = await Post.exists({_id : i});
+            if(!doesPostExist) fav = fav.filter(m => { return m !== i });
+        };
+        fav = [];
+        for(let j of user.favourites) fav.push(j.toString());
+        if(req.session.modifications) {
+            for(let i of req.session.modifications) {
+                if(i[1] === true) {
+                    if(!user.favourites.includes(i[0])) fav.push(i[0]);
+                } else if(i[1] === false) {
+                    if(user.favourites.includes(i[0])) fav = fav.filter(m => { return m !== i[0] });
+                };
+            };
+        };
+        req.session.modifications = [];
+        req.session.save();
+        user.favourites = fav;
+        await user.save();
+        fav = [];
+    };
     next();
 });
 

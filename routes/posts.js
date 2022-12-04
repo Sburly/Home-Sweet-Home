@@ -13,6 +13,10 @@ router.route("/post")
 router.route("/places")
     .get(isLoggedIn, catchAsync(posts.renderYourPlaces));
 
+router.route("/favourites")
+    .get(isLoggedIn, catchAsync(posts.renderFavourites))
+    .patch(isLoggedIn, catchAsync(posts.addFavourite));
+
 router.route("/:id")
     .get(catchAsync(posts.renderShow))
     .patch(isLoggedIn, isAuthor, validatePost, catchAsync(posts.updatePost))

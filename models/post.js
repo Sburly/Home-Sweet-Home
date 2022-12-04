@@ -19,11 +19,7 @@ const PostSchema = new mongoose.Schema({
 
 PostSchema.post("findOneAndDelete", async function(doc) {
     if(doc) {
-        await Review.deleteMany({
-            _id: {
-                $in: doc.reviews
-            }
-        })
+        await Review.deleteMany({ _id: { $in: doc.reviews }});
     };
 });
 
