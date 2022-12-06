@@ -24,6 +24,7 @@
     border: 3px solid var(--black);
     border-radius: var(--radius);
     padding: 0.5em;
+    background: var(--white);
 }
 
 .post__image {

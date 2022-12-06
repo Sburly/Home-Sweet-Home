@@ -87,13 +87,12 @@ app.use((req, res, next) => {
 app.use(async (req, res, next) => {
     if(req.user) {
         const user = await User.findById(req.user._id);
-        let fav = [...user.favourites];
+        let fav = [];
+        for(let j of user.favourites) fav.push(j.toString());
         for(let i of fav) {
             const doesPostExist = await Post.exists({_id : i});
             if(!doesPostExist) fav = fav.filter(m => { return m !== i });
         };
-        fav = [];
-        for(let j of user.favourites) fav.push(j.toString());
         if(req.session.modifications) {
             for(let i of req.session.modifications) {
                 if(i[1] === true) {

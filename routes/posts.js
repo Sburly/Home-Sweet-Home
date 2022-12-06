@@ -17,6 +17,8 @@ router.route("/favourites")
     .get(isLoggedIn, catchAsync(posts.renderFavourites))
     .patch(isLoggedIn, catchAsync(posts.addFavourite));
 
+router.route("/bookings").get(isLoggedIn, catchAsync(posts.renderBookings));
+
 router.route("/:id")
     .get(catchAsync(posts.renderShow))
     .patch(isLoggedIn, isAuthor, validatePost, catchAsync(posts.updatePost))

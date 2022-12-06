@@ -1,0 +1,23 @@
+<% layout('layout') %>
+<div class="container--title">
+    <h1 class="title--big"><b class="title--bold">Your</b> bookings:</h1>
+</div>
+<article class="bookings__display">
+    <% if(currentBookings.length > 0) { %> 
+        <section class="main__display main__display--current main__display--bookings">
+            <h2 class="title--section title--active">Active Bookings</h2>
+            <% for(let booking of currentBookings) { %>
+                <%- partial('partials/bookings-card', { booking }) %>
+            <% } %>
+        </section>
+    <% } %>
+    <% if(expiredBookings.length > 0) { %> 
+        <section class="main__display main__display--expired main__display--bookings">
+            <h2 class="title--section title--expired">Expired Bookings</h2>
+            <% for(let booking of expiredBookings) { %> 
+                <%- partial('partials/bookings-card', { booking }) %>
+            <% } %>
+        </section>
+    <% } %>
+</article>
+<script src="/js/timeLeft.js"></script>

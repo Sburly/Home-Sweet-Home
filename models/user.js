@@ -13,11 +13,8 @@ const UserSchema = new mongoose.Schema({
         ref: "Post"
     }],
     bookings: [{
-        _id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Booking"
-        },
-        date: Date
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Booking"
     }],
     favourites: [{
         type: mongoose.Schema.Types.ObjectId,

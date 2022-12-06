@@ -54,6 +54,9 @@ module.exports.book = async (req, res) => {
     book.post = id;
     book.user = req.user._id;
     book.save();
+    const user = await User.findById(req.user._id);
+    user.bookings.push(book._id);
+    user.save();
     res.redirect(`/${id}`);
 };
 
@@ -84,4 +87,24 @@ module.exports.addFavourite = (req, res) => {
     req.session.modifications = newArray;
     req.session.save();
     return true;
+};
+
+async function populateBookings(array) {
+    let newArray = [];
+    for(let i of array) {
+        let item = await i.populate("post");
+        await item.post.populate("author", "username");
+        await item.populate("user");
+        newArray.push(item);
+    };
+    return newArray;
+};
+
+module.exports.renderBookings = async (req, res) => {
+    const today = new Date();
+    const current = await Booking.find({ user : req.user._id, checkOut : { $gte : today } });
+    const expired = await Booking.find({ user: req.user._id, checkOut : { $lt : today } });
+    const currentBookings = await populateBookings(current);
+    const expiredBookings = await populateBookings(expired);
+    res.render("bookings", { currentBookings, expiredBookings });
 };

@@ -1,4 +1,7 @@
 <% layout('layout') %>
+<div class="container--title">
+    <h1 class="title--big"><b class="title--bold">Your</b> favourites:</h1>
+</div>
 <div class="main__display">
     <% for(let post of posts) { %> 
         <%- partial('partials/card', { post }) %>

@@ -1,0 +1,28 @@
+<div class="post">
+    <article class="post__card">
+        <section class="post__image">
+            <img class="img-fluid" src="/images/cozy-apartment-living-room-ideas-kymacy.jpg" alt="">
+        </section>
+        <section class="post__info">
+            <div>
+                <h2 class="post__name"><%= booking.post.name %></h2>
+                <% if(Number(booking.post.rating)) { %> 
+                    <span class="post__rating"><%= booking.post.rating %>/5</span>
+                <% } else { %>
+                    <span class="post__rating">N/D</span>
+                <% } %>
+            </div>
+            <p><%= booking.post.description %></p>
+            <div>
+                <small>by <%= booking.post.author.username %></small>
+                <small><%= booking.post.location %></small>
+            </div>
+        </section>
+        <section class="post__price">
+            <span data-check-in="<%= booking.checkIn %>" data-check-out="<%= booking.checkOut %>" id="timeLeftDisplay"></span>
+        </section>
+        <section class="post__button">
+            <a href="/<%= booking.post._id %>" class="button--main">View More</a>
+        </section>
+    </article>
+</div>
